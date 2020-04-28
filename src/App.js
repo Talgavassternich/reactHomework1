@@ -1,14 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Todos from "./Todos";
 import AddTodo from "./AddTodo";
 
 const App  = () => {
-    const [state, setState] = useState([
-            {id: Math.random(), content:"Keep calm and stay home!"},
-            {id: Math.random(), content:"Work"},
-            {id: Math.random(), content:"Learn"},
-            {id: Math.random(), content:"Evolve"}
-        ]);
+    const [state, setState] = useState(JSON.parse(localStorage["todos"]));
+    useEffect(() => {
+        localStorage["todos"] = JSON.stringify(state);
+    }, [state]);
     const changeTodo = (newTodo, id) => {
       const newTodos = [...state].map(todo => {
           if (todo.id === id) {
