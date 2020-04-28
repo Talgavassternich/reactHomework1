@@ -1,46 +1,41 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import Todos from "./Todos";
 import AddTodo from "./AddTodo";
 
-class App extends Component{
-  state = {
-    todos: [
-        {id: Math.random(), content:"Keep calm and stay home!"},
-        {id: Math.random(), content:"Keep calm and swfdy home!"},
-        {id: Math.random(), content:"Keep cawdlm and stwd home!"},
-        {id: Math.random(), content:"Keep cawdlm and stay home!"}
-    ]
-  };
-  changeTodo = (newTodo, id) => {
-      const newTodos = [...this.state.todos].map(todo => {
+const App  = () => {
+    const [state, setState] = useState([
+            {id: Math.random(), content:"Keep calm and stay home!"},
+            {id: Math.random(), content:"Work"},
+            {id: Math.random(), content:"Learn"},
+            {id: Math.random(), content:"Evolve"}
+        ]);
+    const changeTodo = (newTodo, id) => {
+      const newTodos = [...state].map(todo => {
           if (todo.id === id) {
               todo.content = newTodo;
           }
           return todo;
       });
-      this.setState({todos: newTodos});
-  }
-  removeTodo = (id) => {
-      const newTodos = this.state.todos.filter((todo => {
+      setState(newTodos);
+    };
+    const removeTodo = (id) => {
+      const newTodos = state.filter((todo => {
           return todo.id !== id;
       }));
-      this.setState({todos: newTodos}, () => {
-          console.log(this.state.todos)});
-  }
-  addTodo = (contentObj) => {
-      const newTodos = [...this.state.todos, {id: Math.random(), content: contentObj.content}];
-      this.setState({todos: newTodos});
-}
-  render() {
+      setState(newTodos);
+    };
+    const addTodo = (content) => {
+      const newTodos = [...state, {id: Math.random(), content}];
+      setState(newTodos);
+    };
     return (
-        <div>
+      <div>
           <h1>Todo's</h1>
-          <Todos todos={this.state.todos} changeTodo={this.changeTodo} removeTodo={this.removeTodo}/>
+          <Todos todos={state} changeTodo={changeTodo} removeTodo={removeTodo}/>
           <hr />
-          <AddTodo addTodo={this.addTodo} />
-        </div>
+          <AddTodo addTodo={addTodo} />
+      </div>
     );
-  }
-}
+};
 
 export default App;

@@ -1,26 +1,10 @@
 import React from "react";
+import TodoItem from "./TodoItem";
 
 const Todos = ({todos, changeTodo, removeTodo}) => {
-    const changeHandler = (id, e) => {
-        e.target.style.width = (e.target.value.length) + "ch";
-        changeTodo(e.target.value, id);
-    };
-    const removeHandler = (id) => {
-        removeTodo(id);
-    };
-    const keyPressHandler = (e) => {
-        if (e.keyCode === 13) {
-            e.target.blur();
-        }
-    };
     const todoList = todos.length ? (
         todos.map((todo) => {
-            const size = todo.content.length <= 4 ? todo.content.length + 1 : todo.content.length;
-            return (
-                <div className={"todo"} key={todo.id}>
-                    <div className={"del"} onClick={removeHandler.bind(this, todo.id)}></div>
-                    <input type={"text"} value={todo.content} onChange={changeHandler.bind(this, todo.id)} onKeyUp={keyPressHandler} style={{width: size + "ch"}} />
-                </div>);
+            return <TodoItem onChange={changeTodo} onRemove={removeTodo} todo={todo} key={todo.id} />
         })
     ) : (
         <p>No todo's left</p>
@@ -31,5 +15,6 @@ const Todos = ({todos, changeTodo, removeTodo}) => {
         }}>{todoList}</form>
     );
 }
+
 
 export default Todos;
