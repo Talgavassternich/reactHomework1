@@ -1,18 +1,20 @@
-import React from "react";
+import React, {useContext} from "react";
 import TodoItem from "./TodoItem";
+import {TodosContext} from "./TodosContext";
 
-const Todos = ({todos, changeTodo, removeTodo}) => {
-    const todoList = todos.length ? (
-        todos.map((todo) => {
-            return <TodoItem onChange={changeTodo} onRemove={removeTodo} todo={todo} key={todo.id} />
+const Todos = () => {
+    const context = useContext(TodosContext);
+    const {state} = context;
+    const todoList = state.length ? (
+        state.map((todo) => {
+            return <TodoItem todo={todo} key={todo.id} context={context} />
         })
     ) : (
         <p>No todo's left</p>
     );
+    const submitHandler = e => {e.preventDefault()};
     return (
-        <form className={"form"} onSubmit={(e) => {
-            e.preventDefault();
-        }}>{todoList}</form>
+        <form className={"form"} onSubmit={submitHandler}>{todoList}</form>
     );
 }
 

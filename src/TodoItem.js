@@ -1,22 +1,16 @@
 import React from "react";
+import TodoItemInput from "./TodoItemInput";
 
-const TodoItem = ({ onChange, onRemove, todo, todo: { id,content } }) => {
-    const changeHandler = (e) => {
-        e.target.style.width = (e.target.value.length) + "ch";
-        onChange(e.target.value, id);
-    };
-    const keyPressHandler = (e) => {
-        if (e.keyCode === 13) {
-            e.target.blur();
-        }
-    };
-    const size = content.length <= 4 ? content.length + 1 : content.length;
+const TodoItem = React.memo(({ context: {changeTodo, removeTodo}, todo: { id,content } }) => {
+    const removeHandler = () => {
+        removeTodo(id);
+    }
     return (
         <div className={"todo"}>
-            <div className={"del"} onClick={() => onRemove(id)} />
-            <input type={"text"} value={content} onChange={changeHandler} onKeyUp={keyPressHandler} style={{width: size + "ch"}} />
+            <div className={"del"} onClick={removeHandler} />
+            <TodoItemInput content={content} changeTodo={changeTodo} id={id}></TodoItemInput>
         </div>
     )
-};
+});
 
 export default TodoItem;

@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import {TodosContext} from "./TodosContext";
+import TodoItemInput from "./TodoItemInput";
 
-const AddTodo = ({addTodo}) => {
+const AddTodo = () => {
     const [state, setState] = useState("");
-    const handleChange = (e) => {
-        setState(e.target.value);
-    };
+    const {addTodo} = useContext(TodosContext);
     const handleSubmit = (e) => {
         e.preventDefault();
         if (state === "") {
@@ -15,10 +15,10 @@ const AddTodo = ({addTodo}) => {
     };
     return (
         <form onSubmit={handleSubmit}>
-            <input type={"text"} onChange={handleChange} value={state} />
+            <TodoItemInput changeTodo={setState} content={state} minSize="30"/>
             <button>Add New Todo</button>
         </form>
     );
-}
+};
 
 export default AddTodo;
