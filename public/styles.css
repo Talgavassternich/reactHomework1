@@ -1,0 +1,62 @@
+input[type="text"] {
+    display: inline-block;
+    width: 250px;
+    max-width: 530px;
+}
+button {
+    min-width: 200px;
+}
+#root .todo input {
+    display: inline-block;
+}
+p {
+    padding-left: 42px;
+}
+.form {
+    margin-left: -42px;
+}
+.todo {
+    position: relative;
+    padding-left: 42px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.del {
+    position: absolute;
+    left: 0px;
+    display: inline-block;
+    height: 42px;
+    width: 42px;
+    display: none;
+    cursor: pointer;
+}
+.del::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    background-color: #ffffff;
+    left: 12px;
+    top: 20px;
+    transform: rotate(45deg);
+}
+.del::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    background-color: #ffffff;
+    left: 12px;
+    top: 20px;
+    transform: rotate(-45deg);
+}
+.todo:hover .del {
+    display: block;
+}
+.createDate {
+    display: none;
+}
+.createdTime .createDate {
+    display: inline-block;
+}
