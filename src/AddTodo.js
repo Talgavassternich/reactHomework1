@@ -1,22 +1,18 @@
-import React, {useState, useContext} from "react";
-import {TodosContext} from "./TodosContext";
+import React, {useCallback} from "react";
 import TodoItemInput from "./TodoItemInput";
+import useAddTodo from  "./useAddTodo"
 
-const AddTodo = () => {
-    const [state, setState] = useState("");
-    const {addTodo} = useContext(TodosContext);
-    const handleSubmit = (e) => {
+const AddTodo = ({todosList}) => {
+    const [state, setState, handleSubmit] = useAddTodo("");
+    const onClickHandler = useCallback((e) => {
         e.preventDefault();
-        if (state === "") {
-            return;
-        }
-        addTodo(state);
-        setState("");
-    };
+        todosList.current.showCreated();
+    }, [todosList]);
     return (
         <form onSubmit={handleSubmit}>
-            <TodoItemInput changeTodo={setState} content={state} minSize="30"/>
+            <TodoItemInput changeTodo={setState} content={state} minSize="44.8"/>
             <button>Add New Todo</button>
+            <button type="button" onClick={onClickHandler}>Show Created Time</button>
         </form>
     );
 };

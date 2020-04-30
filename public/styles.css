@@ -1,6 +1,13 @@
 input[type="text"] {
+    display: inline-block;
     width: 250px;
-    max-width: 100%;
+    max-width: 530px;
+}
+button {
+    min-width: 200px;
+}
+#root .todo input {
+    display: inline-block;
 }
 p {
     padding-left: 42px;
@@ -11,6 +18,9 @@ p {
 .todo {
     position: relative;
     padding-left: 42px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
 }
 .del {
     position: absolute;
@@ -43,4 +53,10 @@ p {
 }
 .todo:hover .del {
     display: block;
+}
+.createDate {
+    display: none;
+}
+.createdTime .createDate {
+    display: inline-block;
 }
